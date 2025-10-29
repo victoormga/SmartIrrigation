@@ -44,7 +44,7 @@ cd smart_irrigation
 
 # 2. Crear y activar entorno virtual
 python -m venv .venv
-.\.venv\Scripts\activate  # en Windows
+.\.venv\Scriptsctivate  # en Windows
 # source .venv/bin/activate  # en Linux/Mac
 
 # 3. Instalar dependencias
@@ -57,3 +57,81 @@ python manage.py createsuperuser
 
 # 5. Ejecutar servidor
 python manage.py runserver
+```
+
+Accede en:  
+➡️ http://localhost:8000/admin/ — panel de administración  
+➡️ http://localhost:8000/api/parcelas/ — API REST
+
+---
+
+## 🧪 Pruebas rápidas de API
+
+En **PowerShell**:
+
+```powershell
+# Crear una parcela
+$body = @{
+  nombre="Parcela Norte"
+  cultivo="Olivo"
+  superficie_ha=2.5
+  lat=37.389092
+  lon=-5.984459
+  descripcion="Zona ligeramente inclinada"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/parcelas/" -Headers @{ "Content-Type" = "application/json" } -Body $body
+```
+
+---
+
+## 📂 Estructura de carpetas
+
+```
+smart_irrigation/
+├─ manage.py
+├─ db.sqlite3
+├─ smart_irrigation/
+│  ├─ settings.py
+│  ├─ urls.py
+│  └─ wsgi.py
+└─ parcelas/
+   ├─ models.py
+   ├─ serializers.py
+   ├─ views.py
+   ├─ urls.py
+   ├─ admin.py
+   └─ migrations/
+```
+
+---
+
+## 🧭 Objetivo del proyecto
+
+El sistema pretende evolucionar hacia una **plataforma completa de monitorización agrícola**, que permita:
+- Registrar parcelas y sensores IoT (digital twin)
+- Recoger y analizar lecturas (humedad, temperatura, etc.)
+- Generar recomendaciones automáticas de riego
+- Visualizar datos en mapas y dashboards
+
+---
+
+## 📅 Historial
+
+| Fecha | Hito | Descripción breve |
+|-------|-------|-------------------|
+| 2025-10 | Inicio del TFG | Configuración del entorno, creación del proyecto Django |
+| 2025-10 | CRUD de Parcelas y Sensores | API REST funcional con SQLite |
+| _por definir_ | Próximos módulos | Reglas, alertas, mapa Leaflet, despliegue en Docker |
+
+---
+
+## ✨ Autor
+
+**Víctor Manuel García Alonso**  
+Trabajo Fin de Grado — I.E.S Isidra de Guzmán  
+C.F.G.S Desarrollo de Aplicaciones Web
+
+---
+
+> 🔧 _Este README está en desarrollo. Se actualizará conforme avance el proyecto y se incorporen nuevas funcionalidades._
