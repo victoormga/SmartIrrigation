@@ -79,6 +79,8 @@ class Lectura(models.Model):
         indexes = [
             models.Index(fields=["sensor", "ts"]),
         ]
+        # Si quieres evitar duplicados exactos por instante:
+        unique_together = [('sensor', 'ts')]
 
 
     def __str__(self):

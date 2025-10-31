@@ -44,3 +44,9 @@ class LecturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lectura
         fields = ["id", "sensor", "sensor_codigo", "ts", "valor"]
+
+    def validate_valor(self, v):
+        # Ajusta si tu métrica necesita rango (ej. 0–100 para humedad %)
+        if v is None:
+            raise serializers.ValidationError('El valor es obligatorio.')
+        return v

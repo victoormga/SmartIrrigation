@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Parcela, Sensor
+from .models import Parcela, Sensor, Lectura
 
 
 @admin.register(Parcela)
@@ -12,3 +12,9 @@ class SensorAdmin(admin.ModelAdmin):
     list_display = ("codigo", "tipo", "parcela", "estado", "ultima_lectura_valor", "ultima_lectura_ts")
     list_filter = ("tipo", "estado")
     search_fields = ("codigo", "parcela__nombre")
+
+@admin.register(Lectura)
+class LecturaAdmin(admin.ModelAdmin):
+    list_display = ('sensor', 'ts', 'valor')
+    list_filter = ('sensor',)
+    search_fields = ('sensor__codigo',)
